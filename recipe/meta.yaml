@@ -21,19 +21,19 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ stdlib("c") }}
-    # gfortran called from setup.py but not currently used to build an extension
-    - gfortran  # [win]
+    - gfortran
   host:
     - python
     - setuptools >=67.0
     - cmake >=3.26
     - wheel
     - cython >=3.0
-    - numpy
+    - numpy >=2.0
     - pip
   run:
     - python
-    - scipy >=1.10
+    - numpy >=2.0
+    - scipy >=1.15.0
     - matplotlib-base >=3.7
     - pillow >=8.1
     - mdanalysis >=2.4.0
