@@ -1,5 +1,5 @@
 {% set name = "jscatter" %}
-{% set version = "1.8.0.6" %}
+{% set version = "1.8.3" %}
 
 package:
   name: {{ name|lower }}
@@ -7,13 +7,10 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/jscatter-{{ version }}.tar.gz
-  sha256: 35e1300ad02c9ccd44d93c314a225e66a36865f1a06ee2b676910e54ca25fc58
+  sha256: c9e10ff94a8b52a4079ec39332c00bb449644ea3a5486158542b826adf310d60
 
 build:
-  skip: true  # [py<39]
   script:
-    # Remove cython generated files to re-generate them for numpy v1
-    - {{ PYTHON }} -c "import pathlib; [p.with_suffix('.c').unlink() for p in pathlib.Path('.').rglob('*.pyx')]"
     - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
 
@@ -21,19 +18,20 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ stdlib("c") }}
-    # gfortran called from setup.py but not currently used to build an extension
-    - gfortran  # [win]
+    - {{ compiler('fortran') }}
   host:
     - python
     - setuptools >=67.0
     - cmake >=3.26
     - wheel
     - cython >=3.0
-    - numpy
+    - numpy >=2
     - pip
   run:
+    - llvm-openmp  # [osx]
     - python
-    - scipy >=1.10
+    - numpy >=2
+    - scipy >=1.15.0
     - matplotlib-base >=3.7
     - pillow >=8.1
     - mdanalysis >=2.4.0
