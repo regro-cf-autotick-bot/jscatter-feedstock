@@ -18,8 +18,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ stdlib("c") }}
-    # gfortran called from setup.py but not currently used to build an extension
-    - gfortran
+    - {{ compiler('fortran') }}
   host:
     - python
     - setuptools >=67.0
@@ -29,6 +28,7 @@ requirements:
     - numpy >=2
     - pip
   run:
+    - llvm-openmp  # [osx]
     - python
     - numpy >=2
     - scipy >=1.15.0
