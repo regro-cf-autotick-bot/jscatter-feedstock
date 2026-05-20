@@ -22,7 +22,7 @@ requirements:
   host:
     - python
     - setuptools >=67.0
-    - cmake >=3.26
+    - cmake >=3.30.9
     - wheel
     - cython >=3.0
     - numpy >=2
