@@ -11,6 +11,8 @@ source:
 
 build:
   script:
+    # Remove cython generated files to re-generate them with the version of numpy used to build
+    - {{ PYTHON }} -c "import pathlib; [p.with_suffix('.c').unlink() for p in pathlib.Path('.').rglob('*.pyx')]"
     - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
 
@@ -30,7 +32,7 @@ requirements:
   run:
     - llvm-openmp  # [osx]
     - python
-    - numpy >=2
+    - numpy >=2,<2.5
     - scipy >=1.15.0
     - matplotlib-base >=3.7
     - pillow >=8.1
