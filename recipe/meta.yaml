@@ -1,13 +1,13 @@
 {% set name = "jscatter" %}
-{% set version = "1.9.0.1" %}
+{% set version = "1.9.0.2" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/jscatter-{{ version }}.tar.gz
-  sha256: 639306c85f25dbc0539d1c1cfc8eb1fe9c82179472fcb8379f77dc6aee830c07
+  url: https://files.pythonhosted.org/packages/source/{{ name[0] }}/{{ name }}/jscatter-{{ version }}.tar.gz
+  sha256: 626b8b6b92c1003c80e600e6129d96b4041d12274195a92a9ac7a6d8d66c7803
 
 build:
   script:
